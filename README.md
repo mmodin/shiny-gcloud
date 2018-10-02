@@ -3,7 +3,7 @@
 ## 1. Set up a virtual machine (Compute Engine) in Google Cloud
 For testing I went with with the n1-standard-1 (1 vCPU, 3.75 GB memory) with a 10 GB standard persistent disk running Debian GNU/Linux 9 (stretch). I initially tested the f1-micro	(1 shared vCPU and 0.60 GB memory) VM but I ended up running out of memory during the installation locking up the entire machine.
 
-## 2. Installing R & Shiny
+## 2. Install R & Shiny
 [Rstudio](https://www.rstudio.com/products/shiny/download-server/) has a detailed guide on how to install and configure a Shiny server. I would also recommend checking out the [Admininistrator's guide](http://docs.rstudio.com/shiny-server/).
 
 I put all the necessary dependencies and installation steps in [`startup.sh`](https://github.com/mmodin/shiny-gcloud/blob/master/setup.sh) that can just be executed. The steps are as follows:
@@ -38,5 +38,5 @@ sudo gdebi shiny-server-1.5.9.923-amd64.deb
 sudo systemctl status shiny-server
 ```
 
-## 3. Configure the firewall to allow inbound traffic.
+## 3. Configure the firewall to allow inbound traffic
 Depending on your use case you might want to configure the firewall to allow traffic. Shiny runs on port 3838 by default which will have to be added to the firewall. You can edit the default port by editing the shiny configuration file `/etc/shiny-server/shiny-server.conf`

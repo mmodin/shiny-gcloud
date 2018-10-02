@@ -6,7 +6,7 @@ For testing I went with with the n1-standard-1 (1 vCPU, 3.75 GB memory) with a 1
 ## 2. Installing R & Shiny
 [Rstudio](https://www.rstudio.com/products/shiny/download-server/) has a detailed guide on how to install and configure a Shiny server. I would also recommend checking out the [Admininistrator's guide](http://docs.rstudio.com/shiny-server/).
 
-I put all the necessary dependencies and [`startup.sh`](https://github.com/mmodin/shiny-gcloud/blob/master/setup.sh) that can just be executed. The steps are as follows:
+I put all the necessary dependencies and installation steps in [`startup.sh`](https://github.com/mmodin/shiny-gcloud/blob/master/setup.sh) that can just be executed. The steps are as follows:
 
 1. SSH into the VM using your local machine. I simply used Google's in-browser "Active Cloud Shell".
 2. Update and upgrade system packages.
@@ -18,7 +18,7 @@ sudo apt-get -y upgrade
 ```shell
 sudo apt-get -y install r-base git libcurl4-openssl-dev libssl-dev libxml2-dev
 ```
-4. Install R-packages. The only package you actually need is `shiny`. The demo example that comes with the Shiny server installation requires `rmarkdown`. I personally use `data.table` for tables and `plotly` for graphing.
+4. Install R-packages. The only package you actually need is `shiny`. The demo example that comes with the Shiny server installation requires `rmarkdown`. I personally use `data.table` for tables and `plotly` for graphing both of which have many dependencies that will have to be installed - this will most likely take a few minutes to finish.
 
 ```shell
 sudo su - \
@@ -37,3 +37,6 @@ sudo gdebi shiny-server-1.5.9.923-amd64.deb
 ```shell
 sudo systemctl status shiny-server
 ```
+
+## 3. Configure the firewall to allow inbound traffic.
+Depending on your use case you might want to configure the firewall to allow traffic. Shiny runs on port 3838 by default which will have to be added to the firewall. You can edit the default port by editing the shiny configuration file `/etc/shiny-server/shiny-server.conf`
